@@ -1,0 +1,26 @@
+#!/bin/bash
+
+input="/home/devops3/shanker/InFiles/input.txt"
+
+output="/home/devops3/shanker/OutFiles/output.txt"
+
+while IFS= read -r ip port
+  do
+     nc -zv $ip:$port > /dev/null && echo "Success connecting to $ip on port $port." >> $output || echo "Failed to connect to $ip on port $port." >> $output
+  done < $input
+
+#return_code = $?
+#while IFS= read -r ip port
+#do
+#   ping -c -1 $ip:$port
+#  
+#curl -s $ip:$port > /dev/null && echo "Success connecting to $ip on port $port." >> $output || echo "Failed to connect to $ip on port $port." >> $output
+#   if (return_code == 0); then
+#      echo "Success connecting to $ip on port $port." >> $output
+#   else 
+#      echo "Failed to connect to $ip on port $port."
+#   if
+#done < $input
+
+
+

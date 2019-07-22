@@ -1,0 +1,23 @@
+#!/bin/bash
+
+DATETIME=`date +"%Y%m%d"`
+echo "Date is : $DATETIME"
+
+cd /home/devops3/shanker/InFiles
+
+sudo find -type f -printf '%s %p\n'| sort -rn | head -n 5
+
+for file in $(sudo find -type f -printf '%s %p\n'| sort -rn | head -n 5 )
+do
+                
+   if [[ $file =~ ^[0-9]+$ ]]
+      then 
+          continue
+      else
+          getbasename=$(basename $file)
+          #echo $getbasenameF
+          renamedLargestfile="$getbasename-$DATETIME"
+          mv $file /home/devops3/shanker/OutFiles/$renamedLargestfile
+   fi
+done
+
